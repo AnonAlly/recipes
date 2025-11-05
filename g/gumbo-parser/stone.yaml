@@ -1,0 +1,22 @@
+#
+# SPDX-FileCopyrightText: © 2025- AerynOS Developers
+#
+# SPDX-License-Identifier: MPL-2.0
+#
+name        : gumbo-parser
+version     : 0.13.2
+release     : 1
+homepage    : https://codeberg.org/gumbo-parser/gumbo-parser
+upstreams   :
+    - https://codeberg.org/gumbo-parser/gumbo-parser/archive/0.13.2.zip : 2135d9f546a4ee2ac18a96f88245ce2b81d64ea0a087db644be78105425b3141
+summary     : An HTML5 parsing library in pure C99
+description : |
+    Gumbo is an implementation of the HTML5 parsing algorithm implemented as a pure C99 library with no outside dependencies.
+license     : 
+    - Apache-2.0
+setup      : |
+    %reconfigure --disable-static
+build      : |
+    %make
+install    : |
+    %make_install
