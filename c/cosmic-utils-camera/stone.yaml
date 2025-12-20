@@ -1,0 +1,32 @@
+#
+# SPDX-FileCopyrightText: © 2025- AerynOS Developers
+#
+# SPDX-License-Identifier: MPL-2.0
+#
+name        : cosmic-utils-camera
+version     : 0.1.18
+release     : 1
+homepage    : https://github.com/cosmic-utils/camera
+upstreams   :
+    - git|https://github.com/cosmic-utils/camera.git : bd5705f0a521c2d85040e3640b0d6d2cf2931ab7
+summary     : Camera application for the COSMIC™ desktop environment 
+description : |
+    Camera application for the COSMIC™ desktop environment 
+license     : 
+    - GPL-3.0-or-later
+builddeps   :
+    - binary(just)
+    - pkgconfig(glib-2.0)
+    - pkgconfig(gstreamer-app-1.0)
+    - pkgconfig(libinput)
+    - pkgconfig(libseat)
+    - pkgconfig(libudev)
+    - pkgconfig(xkbcommon)
+    - pkgconfig(wayland-protocols)
+networking  : true
+setup       : |
+    %cargo_fetch
+build       : |
+    %cargo_build
+install     : |
+    %cargo_install
