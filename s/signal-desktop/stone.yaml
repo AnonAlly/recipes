@@ -1,0 +1,44 @@
+#
+# SPDX-FileCopyrightText: © 2025- AerynOS Developers
+#
+# SPDX-License-Identifier: MPL-2.0
+#
+name        : signal-desktop
+version     : 7.83.0
+release     : 1
+homepage    : https://signal.org
+upstreams   :
+    - https://updates.signal.org/desktop/apt/pool/s/signal-desktop/signal-desktop_7.83.0_amd64.deb : 
+        hash: 5d7021d466be03af5fba597ac5b6c0e5d66f1e45ed2de3de979ca061661c57c2
+        rename: signal.deb
+summary     : UPDATE SUMMARY
+description : |
+    UPDATE DESCRIPTION
+license     : UPDATE LICENSE
+builddeps  :
+    - binary(bsdtar-static)
+    - binary(tar)
+    - pkgconfig(alsa)
+    - pkgconfig(cups)
+    - pkgconfig(gbm)
+    #- pkgconfig(gtk+-2.0)
+    - pkgconfig(gtk+-3.0)
+    - pkgconfig(libdrm)
+    - pkgconfig(libpulse)
+    - pkgconfig(xscrnsaver)
+setup      : |
+    ar xf %(sourcedir)/signal.deb
+    mkdir root
+    tar xf data.tar.xz -C root
+install    : |
+    # This only excludes /usr/bin link which will be invalid
+    install -dm00755 %(installroot)%(bindir)
+    install -dm00644 %(installroot)%(datadir)/{applications,pixmaps,signal-desktop}
+    cp -R root/usr/share/icons %(installroot)%(datadir)/
+
+    # # We do not use /opt for binary packages in Solus, so just use /usr/share.
+    cp -R root/opt/Signal/* %(installroot)%(datadir)/signal-desktop/
+    ln -sv /usr/share/signal-desktop/signal-desktop $installdir/usr/bin/signal-desktop
+
+    # install -Dm00644 root/usr/share/icons/hicolor/512x512/apps/signal-desktop.png %(installroot)%(datadir)/icons/hicolor/512x512/apps/signal-desktop.png
+    # install -Dm00644 %(pkgdir)/signal-desktop.desktop %(installroot)%(datadir)/applications
