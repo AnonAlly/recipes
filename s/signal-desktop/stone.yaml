@@ -26,19 +26,28 @@ builddeps  :
     - pkgconfig(libdrm)
     - pkgconfig(libpulse)
     - pkgconfig(xscrnsaver)
+debug       : false
+strip       : false
 setup      : |
     ar xf %(sourcedir)/signal.deb
-    mkdir root
-    tar xf data.tar.xz -C root
-install    : |
-    # This only excludes /usr/bin link which will be invalid
-    install -dm00755 %(installroot)%(bindir)
-    install -dm00644 %(installroot)%(datadir)/{applications,pixmaps,signal-desktop}
-    cp -R root/usr/share/icons %(installroot)%(datadir)/
+    bsdtar-static xf data.tar.*
+install     : |
+    _signal_root=%(libdir)/signal
+    _signal_install=%(installroot)/$_signal_root
 
-    # # We do not use /opt for binary packages in Solus, so just use /usr/share.
-    cp -R root/opt/Signal/* %(installroot)%(datadir)/signal-desktop/
-    ln -sv /usr/share/signal-desktop/signal-desktop $installdir/usr/bin/signal-desktop
+    %install_dir $_signal_install
+    cp -R opt/Signal/* $_signal_install
 
-    # install -Dm00644 root/usr/share/icons/hicolor/512x512/apps/signal-desktop.png %(installroot)%(datadir)/icons/hicolor/512x512/apps/signal-desktop.png
-    # install -Dm00644 %(pkgdir)/signal-desktop.desktop %(installroot)%(datadir)/applications
+    # # Wrapper binary and script to disable the update check
+    # %install_exe %(pkgdir)/discord.sh.in %(installroot)/%(bindir)/discord
+    # sed -i "s|@@DISCORD_ROOT@@|$_discord_root|g" %(installroot)/%(bindir)/discord
+    # %install_exe %(pkgdir)/disable-breaking-updates.py -t $_discord_install/
+
+    # # Desktop file, icon
+    # %install_file %(pkgdir)/discord.desktop %(installroot)/%(datadir)/applications/discord.desktop
+    # rm -v $_discord_install/discord.desktop
+    # %install_dir %(installroot)/%(datadir)/icons/hicolor/256x256/apps
+    # ln -srv $_discord_install/discord.png %(installroot)/%(datadir)/icons/hicolor/256x256/apps/discord.png
+
+    # # Useless to us
+    # rm -v $_discord_install/postinst.sh
