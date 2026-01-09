@@ -38,16 +38,9 @@ install     : |
     %install_dir $_signal_install
     cp -R opt/Signal/* $_signal_install
 
-    # # Wrapper binary and script to disable the update check
-    # %install_exe %(pkgdir)/discord.sh.in %(installroot)/%(bindir)/discord
-    # sed -i "s|@@DISCORD_ROOT@@|$_discord_root|g" %(installroot)/%(bindir)/discord
-    # %install_exe %(pkgdir)/disable-breaking-updates.py -t $_discord_install/
-
-    # # Desktop file, icon
-    # %install_file %(pkgdir)/discord.desktop %(installroot)/%(datadir)/applications/discord.desktop
-    # rm -v $_discord_install/discord.desktop
-    # %install_dir %(installroot)/%(datadir)/icons/hicolor/256x256/apps
-    # ln -srv $_discord_install/discord.png %(installroot)/%(datadir)/icons/hicolor/256x256/apps/discord.png
-
-    # # Useless to us
-    # rm -v $_discord_install/postinst.sh
+    # Desktop file, icon
+    %install_file %(pkgdir)/signal-desktop.desktop %(installroot)/%(datadir)/applications/signal-desktop.desktop
+    
+    for i in 32 64 128 256 512; do
+        %install_file usr/share/icons/hicolor/${i}x${i}/apps/signal-desktop.png %(installroot)%(datadir)/icons/hicolor/${i}x${i}/apps/signal-desktop.png
+    done

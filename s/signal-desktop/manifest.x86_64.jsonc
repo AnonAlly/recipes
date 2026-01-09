@@ -172,7 +172,13 @@
 				"/usr/lib/signal/signal-desktop",
 				"/usr/lib/signal/snapshot_blob.bin",
 				"/usr/lib/signal/v8_context_snapshot.bin",
-				"/usr/lib/signal/vk_swiftshader_icd.json"
+				"/usr/lib/signal/vk_swiftshader_icd.json",
+				"/usr/share/applications/signal-desktop.desktop",
+				"/usr/share/icons/hicolor/128x128/apps/signal-desktop.png",
+				"/usr/share/icons/hicolor/256x256/apps/signal-desktop.png",
+				"/usr/share/icons/hicolor/32x32/apps/signal-desktop.png",
+				"/usr/share/icons/hicolor/512x512/apps/signal-desktop.png",
+				"/usr/share/icons/hicolor/64x64/apps/signal-desktop.png"
 			],
 			"name": "signal-desktop",
 			"provides": [
