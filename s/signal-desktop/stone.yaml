@@ -38,6 +38,8 @@ install     : |
     %install_dir $_signal_install
     cp -R opt/Signal/* $_signal_install
 
+    %install_bin $_signal_install/signal-desktop
+
     # Desktop file, icon
     %install_file %(pkgdir)/signal-desktop.desktop %(installroot)/%(datadir)/applications/signal-desktop.desktop
     

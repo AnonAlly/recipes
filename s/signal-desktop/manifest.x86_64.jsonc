@@ -33,6 +33,7 @@
 				"soname(libdbus-1.so.3(x86_64))",
 				"soname(libdl.so.2(x86_64))",
 				"soname(libexpat.so.1(x86_64))",
+				"soname(libffmpeg.so(x86_64))",
 				"soname(libgbm.so.1(x86_64))",
 				"soname(libgcc_s.so.1(x86_64))",
 				"soname(libgio-2.0.so.0(x86_64))",
@@ -53,6 +54,7 @@
 				"soname(libxkbcommon.so.0(x86_64))"
 			],
 			"files": [
+				"/usr/bin/signal-desktop",
 				"/usr/lib/signal/LICENSE.electron.txt",
 				"/usr/lib/signal/LICENSES.chromium.html",
 				"/usr/lib/signal/chrome-sandbox",
@@ -182,6 +184,7 @@
 			],
 			"name": "signal-desktop",
 			"provides": [
+				"binary(signal-desktop)",
 				"soname(signal/libEGL.so(x86_64))",
 				"soname(signal/libGLESv2.so(x86_64))",
 				"soname(signal/libffmpeg.so(x86_64))",
